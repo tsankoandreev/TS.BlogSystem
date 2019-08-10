@@ -4,7 +4,8 @@ using System.Text;
 
 namespace TS.BlogSystem.Core.Entities
 {
-    class Tag
+    public class Tag : Entity
     {
+        public string Text { get; set; }
     }
 }
