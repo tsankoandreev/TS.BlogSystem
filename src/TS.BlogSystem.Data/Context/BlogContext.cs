@@ -8,6 +8,7 @@ namespace TS.BlogSystem.Data.Context
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
+            BlogContextSeed.SeedAsync(this).Wait();
         }
 
         public DbSet<Category> Categories { get; set; }

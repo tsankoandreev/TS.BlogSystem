@@ -15,5 +15,7 @@ namespace TS.BlogSystem.Core.Entities
 
         public virtual Category Category { get; set; }
         public virtual BlogUser Author { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
