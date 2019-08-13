@@ -14,7 +14,7 @@ namespace TS.BlogSystem.Core.Entities
         public bool? IsPending { get; set; }
 
         public virtual Category Category { get; set; }
-        public virtual BlogUser Author { get; set; }
+        public virtual User Author { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
     }
