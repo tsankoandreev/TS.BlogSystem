@@ -1,4 +1,4 @@
-﻿@model IList<TS.BlogSystem.Web.Models.CategoryViewModel>
+﻿@model TS.BlogSystem.Core.Interfaces.IPagedList<TS.BlogSystem.Web.Models.CategoryViewModel>
 
 @for (int i = 0; i < Model.Count(); i++)
 {
@@ -17,3 +17,13 @@
 }
 }
 
+<!-- Pagination -->
+<ul class="pagination justify-content-center mb-4">
+    <li class="page-item  @(Model.HasPreviousPage?"":"disabled")">
+        <a class="page-link" asp-action="GetAll" asp-route-page ="@(Model.PageIndex-1)" >&larr; Older</a>
+    </li>
+    <li class="page-item @(Model.HasNextPage?"":"disabled")">
+        <a class="page-link" asp-action="GetAll" asp-route-page="@(Model.PageIndex+1)">Newer &rarr;</a>
+
+    </li>
+</ul>

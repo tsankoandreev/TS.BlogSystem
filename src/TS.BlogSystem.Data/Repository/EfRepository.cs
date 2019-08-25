@@ -20,10 +20,17 @@ namespace TS.BlogSystem.Data.Repository
             _dbContext = dbContext as BlogContext;
         }
 
+        public IQueryable<T> Query()
+        {
+            return _dbContext.Set<T>();
+        }
         public async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
+        public Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)
+            => _dbContext.Set<T>().FirstOrDefaultAsync(predicate);
+
 
         public async Task<List<T>> ListAllAsync()
         {
@@ -34,6 +41,13 @@ namespace TS.BlogSystem.Data.Repository
         {
             return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
+
+
+        public Task<int> CountAll() => _dbContext.Set<T>().CountAsync();
+
+        public Task<int> CountWhere(Expression<Func<T, bool>> predicate)
+            => _dbContext.Set<T>().CountAsync(predicate);
+
 
         public async Task<T> AddAsync(T entity)
         {

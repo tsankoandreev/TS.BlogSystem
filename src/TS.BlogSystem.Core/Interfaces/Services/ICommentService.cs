@@ -5,7 +5,7 @@ using TS.BlogSystem.Core.Entities;
 
 namespace TS.BlogSystem.Core.Interfaces.Services
 {
-    public interface ICommentService
+    public interface ICommentService:IPagedService<Comment>
     {
         /// <summary>
         /// Delete comment

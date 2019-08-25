@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using TS.BlogSystem.Core.Entities;
+using TS.BlogSystem.Core.Interfaces;
 using TS.BlogSystem.Core.Interfaces.Repository;
 using TS.BlogSystem.Core.Interfaces.Services;
 
@@ -33,6 +36,21 @@ namespace TS.BlogSystem.Services
         }
 
         public Comment GetCommentById(Guid commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, string orderProperty = "", bool asc = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, string orderProperty = "", bool asc = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, Expression<Func<Comment, object>> orderLambda, bool asc = true)
         {
             throw new NotImplementedException();
         }

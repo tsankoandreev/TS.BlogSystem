@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TS.BlogSystem.Core.Entities;
 
 namespace TS.BlogSystem.Core.Interfaces.Services
 {
-    public interface ICategoryService
+    public interface ICategoryService:IPagedService<Category>
     {
         /// <summary>
         /// Delete category
         /// </summary>
         /// <param name="category">Category</param>
-        void DeleteCategory(Category category);
+        Task DeleteCategory(Category category);
         /// <summary>
         /// Gets a category
         /// </summary>
@@ -23,18 +24,18 @@ namespace TS.BlogSystem.Core.Interfaces.Services
         /// Inserts category
         /// </summary>
         /// <param name="category">Category</param>
-        void InsertCategory(Category category);
+        Task InsertCategory(Category category);
 
         /// <summary>
         /// Updates the category
         /// </summary>
         /// <param name="category">Category</param>
-        void UpdateCategory(Category category);
+        Task UpdateCategory(Category category);
 
         /// <summary>
         /// retrieves all Categories
         /// </summary>
         /// <returns></returns>
-        List<Category> GetAll();
+        Task<List<Category>> GetAll();
     }
 }

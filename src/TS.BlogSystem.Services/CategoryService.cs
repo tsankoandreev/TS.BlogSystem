@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using TS.BlogSystem.Core.Common;
 using TS.BlogSystem.Core.Entities;
+using TS.BlogSystem.Core.Interfaces;
 using TS.BlogSystem.Core.Interfaces.Repository;
 using TS.BlogSystem.Core.Interfaces.Services;
 
@@ -15,14 +20,14 @@ namespace TS.BlogSystem.Services
             this._categoryRepository = categoryRepository;
         }
 
-        public void DeleteCategory(Category category)
+        public async Task DeleteCategory(Category category)
         {
-            throw new NotImplementedException();
+            await _categoryRepository.DeleteAsync(category);
         }
 
-        public List<Category> GetAll()
+        public async Task<List<Category>> GetAll()
         {
-            return  _categoryRepository.ListAllAsync().Result;
+            return await _categoryRepository.ListAllAsync();
         }
 
         public Category GetCategoryById(Guid categoryId)
@@ -30,12 +35,66 @@ namespace TS.BlogSystem.Services
             throw new NotImplementedException();
         }
 
-        public void InsertCategory(Category category)
+        public async Task<IPagedList<Category>> GetPagedResult(int pageIndex, int pageSize, string orderProperty = "", bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _categoryRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Category> result = new PagedList<Category>(
+                    _categoryRepository.Query().OrderBy(x => x.Name)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public void UpdateCategory(Category category)
+        public async Task<IPagedList<Category>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Category, bool>> filter, string orderProperty = "", bool asc = true)
+        {
+            var totalCount = await _categoryRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Category> result = new PagedList<Category>(
+                    _categoryRepository.Query().OrderBy(x => x.Name)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
+        }
+
+        public async Task<IPagedList<Category>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Category, bool>> filter, Expression<Func<Category, object>> orderLambda, bool asc = true)
+        {
+
+            var totalCount = await _categoryRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Category> result = new PagedList<Category>(
+                    _categoryRepository.Query().OrderBy(x => x.Name)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
+        }
+
+        public async Task InsertCategory(Category category)
+        {
+            await _categoryRepository.AddAsync(category);
+        }
+
+        public async Task UpdateCategory(Category category)
+        {
+            await _categoryRepository.UpdateAsync(category);
+        }
+
+        Task<List<Category>> ICategoryService.GetAll()
         {
             throw new NotImplementedException();
         }
