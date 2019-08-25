@@ -8,10 +8,10 @@ namespace TS.BlogSystem.Services
 {
     public class CommentsService : ICommentService
     {
-        private readonly IRepository<Comment> _commentRepository;
-        private readonly IRepository<Post> _postRepository;
+        private readonly IAsyncRepository<Comment> _commentRepository;
+        private readonly IAsyncRepository<Post> _postRepository;
 
-        public CommentsService(IRepository<Comment> commentRepository, IRepository<Post> postRepository)
+        public CommentsService(IAsyncRepository<Comment> commentRepository, IAsyncRepository<Post> postRepository)
         {
             this._commentRepository = commentRepository;
             this._postRepository = postRepository;

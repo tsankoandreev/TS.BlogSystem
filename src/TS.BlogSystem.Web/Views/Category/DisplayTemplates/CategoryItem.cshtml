@@ -1,0 +1,13 @@
+﻿@model TS.BlogSystem.Web.Models.CategoryViewModel
+<!-- Blog Post -->
+<div class="card" style="background-color: lightsteelblue;">
+    <img class="card-img-top" src="http://placehold.it/1050x1050?text=category" alt="Card image cap">
+    <div class="card-body">
+        <h2 class="card-title">@Model.Name</h2>
+        <a asp-area="" asp-controller="Posts" asp-action="GetByCategory" asp-route-categoryId="@Model.Id" class="btn btn-primary">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">
+        12.22.2222
+    </div>
+</div>
+

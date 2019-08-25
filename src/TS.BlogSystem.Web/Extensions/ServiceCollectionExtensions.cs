@@ -23,7 +23,7 @@ namespace TS.BlogSystem.Web.Extensions
                     options.UseInMemoryDatabase("EFInMemory"));
 
             services.AddScoped<IBlogContext, BlogContext>();
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICommentService, CommentsService>();

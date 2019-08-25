@@ -1,0 +1,19 @@
+﻿@model IList<TS.BlogSystem.Web.Models.CategoryViewModel>
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+    @if (i == 0 || i % 3 == 0)
+    {
+        @:<div class="row">
+        }
+
+    <div class="col-sm-4">
+        @Html.DisplayFor(p => Model[i], "CategoryItem")
+    </div>
+
+    @if (i % 3 == 2 || i == Model.Count() - 1)
+    {
+    @:</div>
+}
+}
+

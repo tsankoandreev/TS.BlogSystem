@@ -8,9 +8,9 @@ namespace TS.BlogSystem.Services
 {
     public class PostsService : IPostService
     {
-        private readonly IRepository<Post> _postRepository;
+        private readonly IAsyncRepository<Post> _postRepository;
 
-        public PostsService(IRepository<Post> postRepository)
+        public PostsService(IAsyncRepository<Post> postRepository)
         {
             this._postRepository = postRepository;
         }

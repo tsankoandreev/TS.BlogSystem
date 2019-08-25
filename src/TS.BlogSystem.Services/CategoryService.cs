@@ -8,9 +8,9 @@ namespace TS.BlogSystem.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IRepository<Category> _categoryRepository;
+        private readonly IAsyncRepository<Category> _categoryRepository;
 
-        public CategoryService(IRepository<Category> categoryRepository)
+        public CategoryService(IAsyncRepository<Category> categoryRepository)
         {
             this._categoryRepository = categoryRepository;
         }
@@ -22,7 +22,7 @@ namespace TS.BlogSystem.Services
 
         public List<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return  _categoryRepository.ListAllAsync().Result;
         }
 
         public Category GetCategoryById(Guid categoryId)
