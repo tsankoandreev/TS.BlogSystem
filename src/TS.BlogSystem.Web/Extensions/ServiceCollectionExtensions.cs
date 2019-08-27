@@ -28,6 +28,7 @@ namespace TS.BlogSystem.Web.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICommentService, CommentsService>();
             services.AddScoped<IPostService, PostsService>();
+            services.AddScoped<IEmailService, EmailService>();
         }
 
         public static void AddCustomizedIdentity(IServiceCollection services)

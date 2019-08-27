@@ -32,7 +32,7 @@ namespace TS.BlogSystem.Web
                 options.CheckConsentNeeded = context => true;
             });
 
-
+            services.AddMvc();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
