@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using TS.BlogSystem.Core.Entities;
+using TS.BlogSystem.Core.Interfaces;
 using TS.BlogSystem.Core.Interfaces.Repository;
 using TS.BlogSystem.Core.Interfaces.Services;
 
@@ -15,29 +18,44 @@ namespace TS.BlogSystem.Services
             this._postRepository = postRepository;
         }
 
-        public void DeletePost(Post post)
+        public Task<Post> GetById(Guid entityId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Post> GetAll()
+        public Task<List<Post>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Post GetPostById(Guid postId)
+        public Task<IPagedList<Post>> GetPagedResult(int page, int pageCount, string orderProperty = "", bool asc = true)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertPost(Post post)
+        public Task<IPagedList<Post>> GetPagedResult(int page, int pageCount, Expression<Func<Post, bool>> filter, string orderProperty = "", bool asc = true)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdatePost(Post post)
+        public Task<IPagedList<Post>> GetPagedResult(int page, int pageCount, Expression<Func<Post, bool>> filter, Expression<Func<Post, object>> orderLambda, bool asc = true)
         {
             throw new NotImplementedException();
         }
+
+        public Task Insert(Post entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(Post entity)
+        {
+            throw new NotImplementedException();
+        }
+        public Task Delete(Post entity)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace TS.BlogSystem.Services
             this._categoryRepository = categoryRepository;
         }
 
-        public async Task DeleteCategory(Category category)
+        public async Task Delete(Category category)
         {
             await _categoryRepository.DeleteAsync(category);
         }
@@ -30,7 +30,7 @@ namespace TS.BlogSystem.Services
             return await _categoryRepository.ListAllAsync();
         }
 
-        public Category GetCategoryById(Guid categoryId)
+        public Task<Category> GetById(Guid categoryId)
         {
             throw new NotImplementedException();
         }
@@ -84,19 +84,14 @@ namespace TS.BlogSystem.Services
             return result;
         }
 
-        public async Task InsertCategory(Category category)
+        public async Task Insert(Category category)
         {
             await _categoryRepository.AddAsync(category);
         }
 
-        public async Task UpdateCategory(Category category)
+        public async Task Update(Category category)
         {
             await _categoryRepository.UpdateAsync(category);
-        }
-
-        Task<List<Category>> ICategoryService.GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

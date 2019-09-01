@@ -20,12 +20,12 @@ namespace TS.BlogSystem.Services
             this._postRepository = postRepository;
         }
 
-        public void DeleteComment(Comment comment)
+        public Task<Comment> GetById(Guid entityId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Comment> GetAll()
+        public Task<List<Comment>> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -35,32 +35,32 @@ namespace TS.BlogSystem.Services
             throw new NotImplementedException();
         }
 
-        public Comment GetCommentById(Guid commentId)
+        public Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, string orderProperty = "", bool asc = true)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, string orderProperty = "", bool asc = true)
+        public Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, string orderProperty = "", bool asc = true)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, string orderProperty = "", bool asc = true)
+        public Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, Expression<Func<Comment, object>> orderLambda, bool asc = true)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, Expression<Func<Comment, object>> orderLambda, bool asc = true)
+        public Task Insert(Comment entity)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertComment(Comment comment)
+        public Task Update(Comment entity)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateComment(Comment comment)
+        public Task Delete(Comment entity)
         {
             throw new NotImplementedException();
         }
