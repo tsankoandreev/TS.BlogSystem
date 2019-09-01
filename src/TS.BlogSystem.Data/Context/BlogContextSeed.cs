@@ -32,8 +32,7 @@ namespace TS.BlogSystem.Data.Context
                 };
 
                 List<User> users = new List<User>(){
-                    new User { Id = Guid.NewGuid(), AccessFailedCount = 0, ConcurrencyStamp = "101cd6ae-a8ef-4a37-97fd-04ac2dd630e4",  LockoutEnabled = false, NormalizedEmail = "SYSTEM@SIMPLCOMMERCE.COM", NormalizedUserName = "SYSTEM@SIMPLCOMMERCE.COM", PasswordHash = "AQAAAAEAACcQAAAAEAEqSCV8Bpg69irmeg8N86U503jGEAYf75fBuzvL00/mr/FGEsiUqfR0rWBbBUwqtw==", PhoneNumberConfirmed = false, SecurityStamp = "a9565acb-cee6-425f-9833-419a793f5fba", TwoFactorEnabled = false,  UserName = "system@blogsystem.com" },
-                    new User { Id = Guid.NewGuid(), AccessFailedCount = 0, ConcurrencyStamp = "c83afcbc-312c-4589-bad7-8686bd4754c0", LockoutEnabled = false, NormalizedEmail = "ADMIN@SIMPLCOMMERCE.COM", NormalizedUserName = "ADMIN@SIMPLCOMMERCE.COM", PasswordHash = "AQAAAAEAACcQAAAAEAEqSCV8Bpg69irmeg8N86U503jGEAYf75fBuzvL00/mr/FGEsiUqfR0rWBbBUwqtw==", PhoneNumberConfirmed = false, SecurityStamp = "d6847450-47f0-4c7a-9fed-0c66234bf61f", TwoFactorEnabled = false,    UserName = "admin@blogsystem.com" }
+                    new User { Id = Guid.NewGuid(), AccessFailedCount = 0, ConcurrencyStamp = "97a5253a-d2fe-449f-90e0-febd7a61e245",  LockoutEnabled = false, NormalizedEmail = "TEST@EMAIL.COM", NormalizedUserName = "TEST@EMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAEMnxP5o796orh2wyjOVliqrRNTRE2Kk+lOFAMS6MUNZQe3+lXb4HZ/eOVS+I94H6cg==", PhoneNumberConfirmed = false, SecurityStamp = "3KYS73RZY5O2CMOEU55K3SWF7NYTKHMZ", TwoFactorEnabled = false,  UserName = "test@email.com" },
                 };
 
                 List<UserRole> userRoles = new List<UserRole>(){

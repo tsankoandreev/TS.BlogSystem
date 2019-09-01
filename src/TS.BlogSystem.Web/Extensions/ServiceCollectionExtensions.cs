@@ -20,7 +20,7 @@ namespace TS.BlogSystem.Web.Extensions
         public static void AddServiceDependencies(IServiceCollection services)
         {
             services.AddDbContext<BlogContext>(options =>
-                    options.UseInMemoryDatabase("EFInMemory"));
+                    options.UseSqlite("Data Source=BlogDatabase.db", b => b.MigrationsAssembly("TS.BlogSystem.Data")));
 
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));

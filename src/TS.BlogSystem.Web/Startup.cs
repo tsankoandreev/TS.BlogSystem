@@ -59,6 +59,7 @@ namespace TS.BlogSystem.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
