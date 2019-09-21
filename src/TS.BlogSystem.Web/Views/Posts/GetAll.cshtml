@@ -1,0 +1,21 @@
+﻿@model TS.BlogSystem.Core.Interfaces.IPagedList<TS.BlogSystem.Web.Models.PostViewModel>
+
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+    @if (i == 0 || i % 3 == 0)
+    {
+        @:<div class="row">
+        }
+
+    <div class="col-sm-4">
+        @Html.DisplayFor(p => Model[i], "PostItem")
+    </div>
+
+    @if (i % 3 == 2 || i == Model.Count() - 1)
+    {
+    @:</div>
+}
+}
+
+<a asp-action="GetAll" asp-controller="Category">Back to Categories</a>

@@ -1,0 +1,12 @@
+﻿<!-- Blog Post -->
+<div class="card" style="background-color: lightyellow;">
+    <img class="card-img-top" src="http://placehold.it/250x250?text=post" alt="Card image cap">
+    <div class="card-body">
+        <h2 class="card-title">@Model.Title</h2>
+        <p class="card-text">@Model.Content</p>
+        <a asp-area="" asp-controller="Posts" asp-action="Get" asp-route-postId="@Model.Id" class="btn btn-primary">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">
+        @Model.DateCreated
+    </div>
+</div>

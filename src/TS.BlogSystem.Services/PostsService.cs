@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TS.BlogSystem.Core.Common;
 using TS.BlogSystem.Core.Entities;
 using TS.BlogSystem.Core.Interfaces;
 using TS.BlogSystem.Core.Interfaces.Repository;
@@ -18,43 +20,76 @@ namespace TS.BlogSystem.Services
             this._postRepository = postRepository;
         }
 
-        public Task<Post> GetById(Guid entityId)
+        public async Task<Post> GetById(Guid entityId)
         {
-            throw new NotImplementedException();
+            return await _postRepository.GetByIdAsync(entityId);
         }
 
-        public Task<List<Post>> GetAll()
+        public async Task<List<Post>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _postRepository.ListAllAsync();
         }
 
-        public Task<IPagedList<Post>> GetPagedResult(int page, int pageCount, string orderProperty = "", bool asc = true)
+        public async Task<IPagedList<Post>> GetPagedResult(int pageIndex, int pageSize, string orderProperty = "", bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _postRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Post> result = new PagedList<Post>(
+                    _postRepository.Query().OrderBy(x => x.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public Task<IPagedList<Post>> GetPagedResult(int page, int pageCount, Expression<Func<Post, bool>> filter, string orderProperty = "", bool asc = true)
+        public async Task<IPagedList<Post>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Post, bool>> filter, string orderProperty = "", bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _postRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Post> result = new PagedList<Post>(
+                    _postRepository.Query().OrderBy(x => x.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public Task<IPagedList<Post>> GetPagedResult(int page, int pageCount, Expression<Func<Post, bool>> filter, Expression<Func<Post, object>> orderLambda, bool asc = true)
+        public async Task<IPagedList<Post>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Post, bool>> filter, Expression<Func<Post, object>> orderLambda, bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _postRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Post> result = new PagedList<Post>(
+                    _postRepository.Query().OrderBy(x => x.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public Task Insert(Post entity)
+        public async Task Insert(Post entity)
         {
-            throw new NotImplementedException();
+            await _postRepository.AddAsync(entity);
         }
 
-        public Task Update(Post entity)
+        public async Task Update(Post entity)
         {
-            throw new NotImplementedException();
+            await _postRepository.UpdateAsync(entity);
         }
-        public Task Delete(Post entity)
+        public async Task Delete(Post entity)
         {
-            throw new NotImplementedException();
+            await _postRepository.DeleteAsync(entity);
         }
 
     }
