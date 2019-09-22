@@ -19,14 +19,31 @@ namespace TS.BlogSystem.Data.Context
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Role>().ToTable("Roles");
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens");
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
+
+            modelBuilder.Entity<Category>().ToTable("Categories");
+            modelBuilder.Entity<Comment>().ToTable("Comments");
+            modelBuilder.Entity<Post>().ToTable("Posts");
+            modelBuilder.Entity<Tag>().ToTable("Tags");
 
             modelBuilder.Entity<UserRole>(b =>
             {
                 b.HasKey(ur => new { ur.UserId, ur.RoleId });
-                b.HasOne(ur => ur.Role).WithMany(x => x.Users).HasForeignKey(r => r.RoleId);
-                b.HasOne(ur => ur.User).WithMany(x => x.Roles).HasForeignKey(u => u.UserId);
+                b.HasOne(ur => ur.Role).WithMany(x => x.UserRoles).HasForeignKey(r => r.RoleId);
+                b.HasOne(ur => ur.User).WithMany(x => x.UserRoles).HasForeignKey(u => u.UserId);
             });
 
             modelBuilder.Entity<IdentityUserLogin<Guid>>(b =>

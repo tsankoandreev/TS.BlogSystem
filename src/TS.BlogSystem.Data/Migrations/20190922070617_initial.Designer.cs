@@ -9,7 +9,7 @@ using TS.BlogSystem.Data.Context;
 namespace TS.BlogSystem.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20190901064431_initial")]
+    [Migration("20190922070617_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -333,13 +333,13 @@ namespace TS.BlogSystem.Data.Migrations
             modelBuilder.Entity("TS.BlogSystem.Core.Entities.UserRole", b =>
                 {
                     b.HasOne("TS.BlogSystem.Core.Entities.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TS.BlogSystem.Core.Entities.User", "User")
-                        .WithMany("Roles")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

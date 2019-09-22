@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TS.BlogSystem.Core.Common;
 using TS.BlogSystem.Core.Entities;
 using TS.BlogSystem.Core.Interfaces;
 using TS.BlogSystem.Core.Interfaces.Repository;
@@ -20,49 +22,82 @@ namespace TS.BlogSystem.Services
             this._postRepository = postRepository;
         }
 
-        public Task<Comment> GetById(Guid entityId)
+        public async Task<Comment> GetById(Guid entityId)
+        {
+            return await _commentRepository.GetByIdAsync(entityId);
+        }
+
+        public async Task<List<Comment>> GetAll()
+        {
+            return await _commentRepository.ListAllAsync();
+        }
+
+        public async Task<List<Comment>> GetAll(Guid postId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Comment>> GetAll()
+        public async Task<IPagedList<Comment>> GetPagedResult(int pageIndex, int pageSize, string orderProperty = "", bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _commentRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Comment> result = new PagedList<Comment>(
+                    _commentRepository.Query().OrderBy(x => x.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public List<Comment> GetAll(Guid postId)
+        public async Task<IPagedList<Comment>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Comment, bool>> filter, string orderProperty = "", bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _commentRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Comment> result = new PagedList<Comment>(
+                    _commentRepository.Query().OrderBy(x => x.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, string orderProperty = "", bool asc = true)
+        public async Task<IPagedList<Comment>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Comment, bool>> filter, Expression<Func<Comment, object>> orderLambda, bool asc = true)
         {
-            throw new NotImplementedException();
+            var totalCount = await _commentRepository.CountAll();
+            var filteredCount = totalCount;//filtered == total
+            IPagedList<Comment> result = new PagedList<Comment>(
+                    _commentRepository.Query().OrderBy(x => x.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize),
+                    pageIndex,
+                    pageSize,
+                    filteredCount,
+                    totalCount);
+
+            return result;
         }
 
-        public Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, string orderProperty = "", bool asc = true)
+        public async Task Insert(Comment entity)
         {
-            throw new NotImplementedException();
+            await _commentRepository.AddAsync(entity);
         }
 
-        public Task<IPagedList<Comment>> GetPagedResult(int page, int pageCount, Expression<Func<Comment, bool>> filter, Expression<Func<Comment, object>> orderLambda, bool asc = true)
+        public async Task Update(Comment entity)
         {
-            throw new NotImplementedException();
+            await _commentRepository.UpdateAsync(entity);
         }
 
-        public Task Insert(Comment entity)
+        public async Task Delete(Comment entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(Comment entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(Comment entity)
-        {
-            throw new NotImplementedException();
+            await _commentRepository.DeleteAsync(entity);
         }
     }
 }

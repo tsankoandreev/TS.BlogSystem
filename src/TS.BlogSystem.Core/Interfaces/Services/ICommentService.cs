@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TS.BlogSystem.Core.Entities;
 
 namespace TS.BlogSystem.Core.Interfaces.Services
@@ -12,6 +13,6 @@ namespace TS.BlogSystem.Core.Interfaces.Services
         /// </summary>
         /// <param name="postId"></param>
         /// <returns></returns>
-        List<Comment> GetAll(Guid postId);
+        Task<List<Comment>> GetAll(Guid postId);
     }
 }

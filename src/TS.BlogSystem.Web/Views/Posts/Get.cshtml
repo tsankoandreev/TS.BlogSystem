@@ -1,5 +1,12 @@
 ﻿@model TS.BlogSystem.Web.Models.PostViewModel
+@{
+    var comment = new TS.BlogSystem.Web.Models.CommentViewModel()
+    {
+        PostId = Model.Id,
+        IsReply = false,
+    };
 
+}
 <div>
     <h4>PostViewModel</h4>
     <hr />
@@ -29,6 +36,24 @@
             @Html.DisplayFor(model => model.DateCreated)
         </dd>
     </dl>
+</div>
+<div class="post-reply">
+    <span>
+        <a class="" role="button" data-toggle="collapse" href="#replyPostComment" aria-expanded="false" aria-controls="collapse-PostComment">Reply</a>
+    </span>
+    <div class="collapse" id="replyPostComment">
+        <form asp-controller="Comments" asp-action="Add" method="POST" data-ajax="true" data-ajax-success="onPostCommentSuccess">
+            <div class="form-group">
+                @Html.HiddenFor(x => comment.PostId)
+                @Html.LabelFor(x => comment.Content)
+                @Html.TextAreaFor(x => comment.Content, new { @class = "form-control", rows = 3 })
+            </div>
+            <button type="submit" class="btn btn-default">Send</button>
+        </form>
+    </div>
+</div>
+<div id="comments">
+    @await Component.InvokeAsync("Comments", new { postId = Model.Id })
 </div>
 
 <a asp-action="GetAll" asp-controller="Posts">Back to Posts</a>

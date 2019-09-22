@@ -331,13 +331,13 @@ namespace TS.BlogSystem.Data.Migrations
             modelBuilder.Entity("TS.BlogSystem.Core.Entities.UserRole", b =>
                 {
                     b.HasOne("TS.BlogSystem.Core.Entities.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TS.BlogSystem.Core.Entities.User", "User")
-                        .WithMany("Roles")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
