@@ -23,7 +23,7 @@ namespace TS.BlogSystem.Web.Controllers
 
         public async Task<IActionResult> GetAll(Guid postId, int commentPage = 0)
         {
-            return ViewComponent("QuoteProcedures", new { postId = postId,commentPage = commentPage });
+            return ViewComponent("Comments", new { postId = postId,commentPage = commentPage });
         }
     }
 }

@@ -1,0 +1,61 @@
+﻿@model TS.BlogSystem.Web.Models.CommentViewModel
+
+<div class="card">
+    <!-- first comment -->
+    <div class="card-header">
+        <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapse-@Model.CommentId" aria-expanded="false" aria-controls="collapse-@Model.CommentId">
+            <span class="fa fa-minus" aria-hidden="true"></span>
+        </button>
+        <span>Author</span> &nbsp; <small class="text-muted">@Model.DateCreated</small>
+    </div>
+    <div class="card-body panel-collapse collapse in" id="collapse-@Model.CommentId">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="vote">
+                    <div class="save-post">
+                        <a href="#"><span class="fa fa-star" aria-label="Save"></span></a>
+                    </div>
+                    <div class="vote-up">
+                        <i class="fa fa-arrow-up"></i>
+                    </div>
+                    <div class="vote-inactive">
+                        <i class="fa fa-inactive"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <p>@Model.Content</p>
+
+                <!-- comment-meta -->
+                <div class="comment-meta">
+                    <span><a href="#">Like</a></span>
+                    <span><a href="#">Report</a></span>
+                    <span>
+                        <a class="" role="button" data-toggle="collapse" href="#replyComment-@Model.CommentId" aria-expanded="false" aria-controls="collapse-@Model.CommentId">Reply</a>
+                    </span>
+                    <div class="collapse" id="replyComment-@Model.CommentId">
+                        <form asp-controller="PostComments" asp-action="AddCommentReply" method="POST" data-ajax="true" data-ajax-success="onPostCommentSuccess">
+                            <div class="form-group">
+                                <label for="comment">Reply Label</label>
+                                <textarea name="comment" class="form-control" rows="3"></textarea>
+                            </div>
+                            <input type="hidden" name="commentId" value="@Model.CommentId" />
+                            <button type="submit" class="btn btn-default">Send</button>
+                        </form>
+                    </div>
+                </div>
+
+                @if (Model.Replies.Any())
+                {
+                    <ul>
+                        @foreach (var child in Model.Replies)
+                        {
+                            @Html.DisplayFor(p => child, "CommentItem")
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
