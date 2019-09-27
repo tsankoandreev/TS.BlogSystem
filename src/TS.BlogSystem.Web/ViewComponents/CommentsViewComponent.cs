@@ -23,7 +23,7 @@ namespace TS.BlogSystem.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(Guid postId, int commentPage = 0)
         {
-            var comments = await _commentService.GetPagedResult(commentPage, 100, x => x.Post.Id == postId && x.IsReply == false, x => x.DateCreated);
+            var comments = await _commentService.GetPagedResult(commentPage, 10, x => x.Post.Id == postId && x.IsReply == false, x => x.DateCreated);
             var data = comments.ToList().Select(x => CommentViewModelMapper.Map(x));
             var commentsResult = new PagedList<CommentViewModel>(data, comments.PageIndex, comments.PageSize, comments.ResultsCaunt, comments.TotalCaunt);
 

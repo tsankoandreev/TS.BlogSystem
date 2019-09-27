@@ -17,13 +17,15 @@
 }
 }
 
-<!-- Pagination -->
+<!-- Pagination ver.1-->
+<pager pager-model="@Model"></pager>
+
+<!-- Pagination ver.2-->
 <ul class="pagination justify-content-center mb-4">
     <li class="page-item  @(Model.HasPreviousPage?"":"disabled")">
-        <a class="page-link" asp-action="GetAll" asp-route-page ="@(Model.PageIndex-1)" >&larr; Older</a>
+        <a class="page-link" asp-action="GetAll" asp-route-page="@(Model.PageIndex-1)">&larr; Older</a>
     </li>
     <li class="page-item @(Model.HasNextPage?"":"disabled")">
         <a class="page-link" asp-action="GetAll" asp-route-page="@(Model.PageIndex+1)">Newer &rarr;</a>
-
     </li>
 </ul>

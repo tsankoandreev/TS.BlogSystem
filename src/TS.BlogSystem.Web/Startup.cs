@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AspNetCore.IServiceCollection.AddIUrlHelper;
+using Microsoft.AspNetCore.Http;
 
 namespace TS.BlogSystem.Web
 {
@@ -25,6 +27,9 @@ namespace TS.BlogSystem.Web
         {
             Extensions.ServiceCollectionExtensions.AddServiceDependencies(services);
             Extensions.ServiceCollectionExtensions.AddCustomizedIdentity(services);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddUrlHelper();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
