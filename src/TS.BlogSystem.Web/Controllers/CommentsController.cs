@@ -21,9 +21,9 @@ namespace TS.BlogSystem.Web.Controllers
             _postService = postService;
         }
 
-        public async Task<IActionResult> GetAll(Guid postId, int commentPage = 0)
+        public async Task<IActionResult> GetAll(Guid postId, int page = 0)
         {
-            return ViewComponent("Comments", new { postId = postId,commentPage = commentPage });
+            return ViewComponent("Comments", new { postId = postId,page = page });
         }
     }
 }

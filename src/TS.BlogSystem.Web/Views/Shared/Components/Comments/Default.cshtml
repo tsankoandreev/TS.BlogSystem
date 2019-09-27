@@ -1,58 +1,9 @@
 ﻿@model TS.BlogSystem.Core.Interfaces.IPagedList<TS.BlogSystem.Web.Models.CommentViewModel>
 
-<input type="hidden" name="commentsPage" id="commentsPage" value="0" />
-
 @for (int i = 0; i < Model.Count(); i++)
 {
     @Html.DisplayFor(p => Model[i], "CommentItem")
 }
 
-<!-- Pagination -->
-<ul class="pagination justify-content-center mb-4">
-    <li class="page-item" id="commentsBack">
-        <a class="page-link" href="#" onclick="loadComments(Number($('#commentsPage').val()) - Number(1))">&larr; Older</a>
-    </li>
-    <li class='page-item @(Model.Count() < 100 ? "disabled" : "")'>
-        <a class="page-link" href="#" onclick="loadComments(Number($('#commentsPage').val()) + Number(1))">Newer &rarr;</a>
-    </li>
-</ul>
-
-<script>
-    $(document).ready(function () {
-        if ($('#commentsPage').val() == 0)
-            $('#commentsBack').addClass('disabled');
-
-        $('[data-toggle="collapse"]').on('click', function () {
-            var $this = $(this),
-                $parent = typeof $this.data('parent') !== 'undefined' ? $($this.data('parent')) : undefined;
-            if ($parent === undefined) { /* Just toggle my  */
-                $this.find('.fa').toggleClass('fa-plus fa-minus');
-                return true;
-            }
-
-            /* Open element will be close if parent !== undefined */
-            var currentIcon = $this.find('.fa');
-            currentIcon.toggleClass('fa-plus fa-minus');
-            $parent.find('.fa').not(currentIcon).removeClass('fa-minus').addClass('fa-plus');
-        });
-        }
-    );
-    function onPostCommentSuccess() {
-        alert('success');
-    }
-
-
-    function loadComments(page) {
-        var _commentPage = parseInt(page);
-        $.get(
-            '@Url.Action("GetAll", "Comments", new
-           {
-               postId = ViewBag.PostId
-           })&commentPage=' + _commentPage,
-            function (data) {
-                $("#comments").html(data);
-                $('#commentsPage').val(_commentPage);
-            }
-       );
-    }
-</script>
+<!-- Pagination ver.1-->
+<pager-ajax pager-ajax-action="GetAll" pager-ajax-controller="Comments" pager-ajax-model="@Model" pager-ajax-update="#comments"></pager-ajax>

@@ -28,4 +28,8 @@
     <ProjectReference Include="..\TS.BlogSystem.Services\TS.BlogSystem.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\jquery-ajax-unobtrusive\" />
+  </ItemGroup>
+
 </Project>
