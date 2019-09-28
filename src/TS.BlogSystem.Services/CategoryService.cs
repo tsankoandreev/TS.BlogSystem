@@ -11,11 +11,12 @@ using TS.BlogSystem.Core.Interfaces.Services;
 
 namespace TS.BlogSystem.Services
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : PagedService<Category>, ICategoryService
     {
         private readonly IAsyncRepository<Category> _categoryRepository;
 
         public CategoryService(IAsyncRepository<Category> categoryRepository)
+            : base(categoryRepository)
         {
             this._categoryRepository = categoryRepository;
         }
@@ -30,58 +31,9 @@ namespace TS.BlogSystem.Services
             return await _categoryRepository.ListAllAsync();
         }
 
-        public Task<Category> GetById(Guid categoryId)
+        public async Task<Category> GetById(Guid categoryId)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IPagedList<Category>> GetPagedResult(int pageIndex, int pageSize, string orderProperty = "", bool asc = true)
-        {
-            var totalCount = await _categoryRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Category> result = new PagedList<Category>(
-                    _categoryRepository.Query().OrderBy(x => x.Name)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
-
-        public async Task<IPagedList<Category>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Category, bool>> filter, string orderProperty = "", bool asc = true)
-        {
-            var totalCount = await _categoryRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Category> result = new PagedList<Category>(
-                    _categoryRepository.Query().OrderBy(x => x.Name)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
-
-        public async Task<IPagedList<Category>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Category, bool>> filter, Expression<Func<Category, object>> orderLambda, bool asc = true)
-        {
-
-            var totalCount = await _categoryRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Category> result = new PagedList<Category>(
-                    _categoryRepository.Query().OrderBy(x => x.Name)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
+            return await _categoryRepository.GetByIdAsync(categoryId);
         }
 
         public async Task Insert(Category category)

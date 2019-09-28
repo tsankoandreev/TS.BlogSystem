@@ -11,12 +11,13 @@ using TS.BlogSystem.Core.Interfaces.Services;
 
 namespace TS.BlogSystem.Services
 {
-    public class CommentsService : ICommentService
+    public class CommentsService : PagedService<Comment>, ICommentService
     {
         private readonly IAsyncRepository<Comment> _commentRepository;
         private readonly IAsyncRepository<Post> _postRepository;
 
         public CommentsService(IAsyncRepository<Comment> commentRepository, IAsyncRepository<Post> postRepository)
+            : base(commentRepository)
         {
             this._commentRepository = commentRepository;
             this._postRepository = postRepository;
@@ -34,56 +35,9 @@ namespace TS.BlogSystem.Services
 
         public async Task<List<Comment>> GetAll(Guid postId)
         {
-            throw new NotImplementedException();
+            return await _commentRepository.ListAsync(c=>c.Post.Id.Equals(postId));
         }
 
-        public async Task<IPagedList<Comment>> GetPagedResult(int pageIndex, int pageSize, string orderProperty = "", bool asc = true)
-        {
-            var totalCount = await _commentRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Comment> result = new PagedList<Comment>(
-                    _commentRepository.Query().OrderBy(x => x.Id)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
-
-        public async Task<IPagedList<Comment>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Comment, bool>> filter, string orderProperty = "", bool asc = true)
-        {
-            var totalCount = await _commentRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Comment> result = new PagedList<Comment>(
-                    _commentRepository.Query().OrderBy(x => x.Id)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
-
-        public async Task<IPagedList<Comment>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Comment, bool>> filter, Expression<Func<Comment, object>> orderLambda, bool asc = true)
-        {
-            var totalCount = await _commentRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Comment> result = new PagedList<Comment>(
-                    _commentRepository.Query().OrderBy(x => x.Id)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
 
         public async Task Insert(Comment entity)
         {

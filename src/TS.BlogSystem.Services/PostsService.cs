@@ -11,11 +11,12 @@ using TS.BlogSystem.Core.Interfaces.Services;
 
 namespace TS.BlogSystem.Services
 {
-    public class PostsService : IPostService
+    public class PostsService : PagedService<Post>,IPostService
     {
         private readonly IAsyncRepository<Post> _postRepository;
 
         public PostsService(IAsyncRepository<Post> postRepository)
+            : base(postRepository)
         {
             this._postRepository = postRepository;
         }
@@ -28,54 +29,6 @@ namespace TS.BlogSystem.Services
         public async Task<List<Post>> GetAll()
         {
             return await _postRepository.ListAllAsync();
-        }
-
-        public async Task<IPagedList<Post>> GetPagedResult(int pageIndex, int pageSize, string orderProperty = "", bool asc = true)
-        {
-            var totalCount = await _postRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Post> result = new PagedList<Post>(
-                    _postRepository.Query().OrderBy(x => x.Id)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
-
-        public async Task<IPagedList<Post>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Post, bool>> filter, string orderProperty = "", bool asc = true)
-        {
-            var totalCount = await _postRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Post> result = new PagedList<Post>(
-                    _postRepository.Query().OrderBy(x => x.Id)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
-        }
-
-        public async Task<IPagedList<Post>> GetPagedResult(int pageIndex, int pageSize, Expression<Func<Post, bool>> filter, Expression<Func<Post, object>> orderLambda, bool asc = true)
-        {
-            var totalCount = await _postRepository.CountAll();
-            var filteredCount = totalCount;//filtered == total
-            IPagedList<Post> result = new PagedList<Post>(
-                    _postRepository.Query().OrderBy(x => x.Id)
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize),
-                    pageIndex,
-                    pageSize,
-                    filteredCount,
-                    totalCount);
-
-            return result;
         }
 
         public async Task Insert(Post entity)
