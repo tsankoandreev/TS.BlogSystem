@@ -39,7 +39,7 @@
 </div>
 <div class="post-reply">
     <span>
-        <a class="" role="button" data-toggle="collapse" href="#replyPostComment" aria-expanded="false" aria-controls="collapse-PostComment">Reply</a>
+        <a id="reply-button" role="button" data-toggle="collapse" href="#replyPostComment" aria-expanded="false" aria-controls="collapse-PostComment">Reply</a>
     </span>
     <div class="collapse" id="replyPostComment">
         <form asp-controller="Comments" asp-action="Add" method="POST" data-ajax="true" data-ajax-success="onPostCommentSuccess">
@@ -53,6 +53,7 @@
     </div>
 </div>
 <div id="comments">
+    <input type="hidden" name="commentsPage" id="commentsPage" value="1" />
     @await Component.InvokeAsync("Comments", new { postId = Model.Id })
 </div>
 
@@ -74,6 +75,20 @@
         }
     );
     function onPostCommentSuccess() {
+        var _commentPage = Number($('#commentsPage').val());
+        $.get(
+            '@Url.Action("GetAll", "Comments", new
+           {
+               postId = Model.Id
+           })&commentPage=' + _commentPage,
+            function (data) {
+                $("#comments").html(data);
+                $('#commentsPage').val(_commentPage);
+
+                $('#replyPostComment').find('textarea').val('')
+                $('#reply-button').trigger('click');
+            }
+       );
         alert('success');
     }
 

@@ -23,7 +23,33 @@ namespace TS.BlogSystem.Web.Controllers
 
         public async Task<IActionResult> GetAll(Guid postId, int page = 0)
         {
-            return ViewComponent("Comments", new { postId = postId,page = page });
+            return ViewComponent("Comments", new { postId = postId, page = page });
+        }
+
+        public async Task<JsonResult> Add(CommentViewModel comment)
+        {
+            try
+            {
+                var post = await _postService.GetById(comment.PostId);
+                if (post != null)
+                    await _commentService.Insert(
+                    new Core.Entities.Comment()
+                    {
+                        Content = comment.Content,
+                        DateCreated = DateTime.Now,
+                        Post = post,
+                        IsReply = false,
+                        Pending = true
+                    }
+                    );
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { error = ex.Message });
+            }
+
+            return Json(new { status = "Success", message = "All done!" });
         }
     }
 }
