@@ -38,6 +38,10 @@ namespace TS.BlogSystem.Services
             return await _commentRepository.ListAsync(c=>c.Post.Id.Equals(postId));
         }
 
+        public async Task<List<Comment>> GetReplies(Guid postId)
+        {
+            return await _commentRepository.ListAsync(c => c.IsReply && c.Post.Id.Equals(postId));
+        }
 
         public async Task Insert(Comment entity)
         {

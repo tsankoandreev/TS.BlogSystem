@@ -14,5 +14,12 @@ namespace TS.BlogSystem.Core.Interfaces.Services
         /// <param name="postId"></param>
         /// <returns></returns>
         Task<List<Comment>> GetAll(Guid postId);
+
+        /// <summary>
+        /// Gets all replies for post
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
+        Task<List<Comment>> GetReplies(Guid postId);
     }
 }

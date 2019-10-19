@@ -34,7 +34,7 @@
                         <a class="" role="button" data-toggle="collapse" href="#replyComment-@Model.CommentId" aria-expanded="false" aria-controls="collapse-@Model.CommentId">Reply</a>
                     </span>
                     <div class="collapse" id="replyComment-@Model.CommentId">
-                        <form asp-controller="PostComments" asp-action="AddCommentReply" method="POST" data-ajax="true" data-ajax-success="onPostCommentSuccess">
+                        <form asp-controller="Comments" asp-action="AddCommentReply" method="POST" data-ajax="true" data-ajax-success="onPostCommentSuccess">
                             <div class="form-group">
                                 <label for="comment">Reply Label</label>
                                 <textarea name="comment" class="form-control" rows="3"></textarea>

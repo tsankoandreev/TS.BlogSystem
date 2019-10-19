@@ -51,5 +51,32 @@ namespace TS.BlogSystem.Web.Controllers
 
             return Json(new { status = "Success", message = "All done!" });
         }
+
+        public async Task<JsonResult> AddCommentReply(string comment, Guid commentId)
+        {
+            try
+            {
+                var c = await _commentService.GetById(commentId);
+                if (c != null)
+                    await _commentService.Insert(
+                    new Core.Entities.Comment()
+                    {
+                        Content = comment,
+                        DateCreated = DateTime.Now,
+                        Post = c.Post,
+                        InReplyTo = c.Id,
+                        IsReply = true,
+                        Pending = true
+                    }
+                    );
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { error = ex.Message });
+            }
+
+            return Json(new { status = "Success", message = "All done!" });
+        }
     }
 }
