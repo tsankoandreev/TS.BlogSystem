@@ -1,4 +1,39 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<TS.BlogSystem.Core.Entities.NavItem>
+<!-- /.navbar-top-links -->
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            @foreach (var item in Model)
+            {
+                if (item.IsParent == false && item.Parent == null)
+                {
+                    <li><a asp-area="@item.Area" asp-action="@item.Action" asp-controller="@item.Controller"><i class="@item.IconClass"></i> @item.Name</a></li>
+                }
+                else
+                {
+                    if (item.IsParent == true)
+                    {
+                        <li>
+                            <a href="#"><i class="@item.IconClass"></i> @item.Name<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                @foreach (var child in Model.Where(p => p.Parent.Id == item.Id))
+                                {
+                                    if (child.Controller == null)
+                                    {
+                                        <li><a href="#">@child.Name</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-area="@child.Area" asp-action="@child.Action" asp-controller="@child.Controller"><i class="@child.IconClass"></i> @child.Name</a></li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->

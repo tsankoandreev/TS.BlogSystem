@@ -25,6 +25,7 @@ namespace TS.BlogSystem.Web.Extensions
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
+            services.AddScoped<INavigationService, NavigationService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICommentService, CommentsService>();
             services.AddScoped<IPostService, PostsService>();
