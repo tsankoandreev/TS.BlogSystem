@@ -39,6 +39,14 @@ namespace TS.BlogSystem.Data.Context
                     new UserRole { UserId = users[0].Id, RoleId = roles[0].Id }
                 };
 
+                List<NavItem> navbar = new List<NavItem>() {
+                new NavItem{ Id = Guid.NewGuid(), Area = "Admin", Controller="Home", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(), Area = "Admin", Controller="Posts", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(), Area = "Admin", Controller="Tags", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(), Area = "Admin", Controller="Comments", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(), Area = "Admin", Controller="Categories", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(), Area = "Admin", Controller="Users", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                };
                 if (!blogContext.Users.Any())
                 {
                     blogContext.Users.AddRange(
@@ -81,6 +89,14 @@ namespace TS.BlogSystem.Data.Context
                 {
                     blogContext.Tags.AddRange(
                        tags);
+
+                    await blogContext.SaveChangesAsync();
+                }
+
+                if (!blogContext.NavItems.Any())
+                {
+                    blogContext.NavItems.AddRange(
+                       navbar);
 
                     await blogContext.SaveChangesAsync();
                 }

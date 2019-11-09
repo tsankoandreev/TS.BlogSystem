@@ -14,6 +14,8 @@ namespace TS.BlogSystem.Data.Context
             BlogContextSeed.SeedAsync(this).Wait();
         }
 
+        public DbSet<NavItem> NavItems { get; set; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -34,6 +36,7 @@ namespace TS.BlogSystem.Data.Context
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
 
+            modelBuilder.Entity<NavItem>().ToTable("NavItems");
             modelBuilder.Entity<Category>().ToTable("Categories");
             modelBuilder.Entity<Comment>().ToTable("Comments");
             modelBuilder.Entity<Post>().ToTable("Posts");
