@@ -30,9 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\lib\admin-lte\css\" />
-    <Folder Include="wwwroot\lib\admin-lte\js\" />
-    <Folder Include="wwwroot\lib\ionicons\css\" />
     <Folder Include="wwwroot\lib\jquery-ajax-unobtrusive\" />
   </ItemGroup>
 
