@@ -40,12 +40,9 @@ namespace TS.BlogSystem.Data.Context
                 };
 
                 List<NavItem> navbar = new List<NavItem>() {
-                new NavItem{ Id = Guid.NewGuid(),Name="Home", Area = "Admin", Controller="Home", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
-                new NavItem{ Id = Guid.NewGuid(),Name="Posts", Area = "Admin", Controller="Posts", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
-                new NavItem{ Id = Guid.NewGuid(),Name="Tags", Area = "Admin", Controller="Tags", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
-                new NavItem{ Id = Guid.NewGuid(),Name="Comments", Area = "Admin", Controller="Comments", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
-                new NavItem{ Id = Guid.NewGuid(),Name="Categories", Area = "Admin", Controller="Categories", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
-                new NavItem{ Id = Guid.NewGuid(),Name="Users", Area = "Admin", Controller="Users", Action="Index", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(),Name="Home", Area = "", Controller="Home", Action="Index", IconClass="fa fa-home", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(),Name="Privacy", Area = "", Controller="Home", Action="Privacy", IconClass="fa fa-lock", IsActive = true, IsParent = false },
+                new NavItem{ Id = Guid.NewGuid(),Name="Categories", Area = "", Controller="Categories", Action="GetAll", IconClass="fa fa-dashboard", IsActive = true, IsParent = false },
                 };
                 if (!blogContext.Users.Any())
                 {

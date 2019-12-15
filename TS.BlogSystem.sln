@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TS.BlogSystem.Data", "src\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TS.BlogSystem.Web", "src\TS.BlogSystem.Web\TS.BlogSystem.Web.csproj", "{27850A56-F347-43CC-BB11-AE501C1D4869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.BlogSystem.Services", "src\TS.BlogSystem.Services\TS.BlogSystem.Services.csproj", "{5F132CF3-E7FB-4DA4-82EC-05A015F149E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TS.BlogSystem.Services", "src\TS.BlogSystem.Services\TS.BlogSystem.Services.csproj", "{5F132CF3-E7FB-4DA4-82EC-05A015F149E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

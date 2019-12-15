@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TS.BlogSystem.Core.Entities.NavItem>
+   
+ <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TS.BlogSystem.Web</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                <ul class="navbar-nav flex-grow-1">
+                    @foreach (var item in Model)
+                    {
+                        if (item.IsParent == false && item.Parent == null)
+                        {
+                            <li class="nav-item"><a class="nav-link text-dark"  asp-area="@item.Area" asp-action="@item.Action" asp-controller="@item.Controller"><i class="@item.IconClass"></i> @item.Name</a></li>
+                        }
+                        else
+                        {
+                            if (item.IsParent == true)
+                            {
+                                <li class="nav-item">
+                                    <a href="#"><i class="@item.IconClass"></i> @item.Name<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        @foreach (var child in Model.Where(p => p.Parent.Id == item.Id))
+                                        {
+                                            if (child.Controller == null)
+                                            {
+                                                <li><a class="nav-link text-dark"  href="#">@child.Name</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="nav-link text-dark"  asp-area="@child.Area" asp-action="@child.Action" asp-controller="@child.Controller"><i class="@child.IconClass"></i> @child.Name</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+           
+       

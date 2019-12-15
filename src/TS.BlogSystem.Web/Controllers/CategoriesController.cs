@@ -9,11 +9,11 @@ using TS.BlogSystem.Web.Models;
 
 namespace TS.BlogSystem.Web.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoriesController(ICategoryService categoryService)
         {
             this._categoryService = categoryService;
         }
