@@ -69,3 +69,46 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.heading-center {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-top: 30px;
+}
+
+    .heading-center .section-heading {
+        margin-bottom: 5px;
+        font-size: 40px;
+        font-weight: 300;
+    }
+
+        .heading-center .section-heading:after {
+            display: none;
+        }
+
+    .heading-center .lead {
+        color: #adadad;
+    }
+
+    .heading-center hr {
+        width: 80px;
+        margin-top: 40px;
+        border-color: #406da4;
+    }
+
+
+
+/* google maps */
+.google-map > div {
+    background-color:dimgray;
+    height: 350px;
+}
+
+    .contact-info li {
+        margin-bottom: 2rem;
+    }
+
+    .contact-info i {
+        font-size: 1.2rem;
+        line-height: 1.75rem;
+    }
