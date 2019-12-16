@@ -10,15 +10,13 @@ namespace TS.BlogSystem.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : Controller
     {
-        private readonly INavigationService _navService;
-
-        public HomeController(INavigationService navService)
+        public HomeController()
         {
-            this._navService = navService;
+           
         }
-        public async  Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            return View( await _navService.GetAll());
+            return View();
         }
     }
 }
