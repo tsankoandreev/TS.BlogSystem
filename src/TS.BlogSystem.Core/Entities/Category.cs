@@ -11,7 +11,9 @@ namespace TS.BlogSystem.Core.Entities
         public bool IsLocked { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public Guid? ParentCategoryId { get; set; }
         public virtual Category ParentCategory { get; set; }
+
         public virtual ICollection<Post> Posts { get; set; }
     }
 }

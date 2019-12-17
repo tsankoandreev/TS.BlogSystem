@@ -11,6 +11,15 @@ namespace TS.BlogSystem.Data.Context
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            {
+                Database.EnsureCreated();
+            }
+            else
+            {
+                Database.Migrate();
+            }
+
             BlogContextSeed.SeedAsync(this).Wait();
         }
 
@@ -41,6 +50,17 @@ namespace TS.BlogSystem.Data.Context
             modelBuilder.Entity<Comment>().ToTable("Comments");
             modelBuilder.Entity<Post>().ToTable("Posts");
             modelBuilder.Entity<Tag>().ToTable("Tags");
+
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.Category)
+                .WithMany(b => b.Posts)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(p => p.Post)
+                .WithMany(b => b.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserRole>(b =>
             {

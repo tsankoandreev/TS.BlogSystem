@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TS.BlogSystem.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class resetInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,6 +25,31 @@ namespace TS.BlogSystem.Data.Migrations
                         name: "FK_Categories_Categories_ParentCategoryId",
                         column: x => x.ParentCategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NavItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Area = table.Column<string>(nullable: true),
+                    Controller = table.Column<string>(nullable: true),
+                    Action = table.Column<string>(nullable: true),
+                    IconClass = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    IsParent = table.Column<bool>(nullable: false),
+                    ParentId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NavItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NavItems_NavItems_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "NavItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -165,7 +190,7 @@ namespace TS.BlogSystem.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -220,7 +245,7 @@ namespace TS.BlogSystem.Data.Migrations
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -237,6 +262,11 @@ namespace TS.BlogSystem.Data.Migrations
                 name: "IX_Comments_PostId",
                 table: "Comments",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NavItems_ParentId",
+                table: "NavItems",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_AuthorId",
@@ -258,6 +288,9 @@ namespace TS.BlogSystem.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "NavItems");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");

@@ -9,14 +9,14 @@ using TS.BlogSystem.Data.Context;
 namespace TS.BlogSystem.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20191109075911_addNavItems")]
-    partial class addNavItems
+    [Migration("20191217083542_resetInitial")]
+    partial class resetInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "3.1.0");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
@@ -178,6 +178,9 @@ namespace TS.BlogSystem.Data.Migrations
                     b.Property<string>("Controller")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("IconClass")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
@@ -188,9 +191,6 @@ namespace TS.BlogSystem.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("ParentId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("iconClass")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -353,7 +353,8 @@ namespace TS.BlogSystem.Data.Migrations
 
                     b.HasOne("TS.BlogSystem.Core.Entities.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TS.BlogSystem.Core.Entities.NavItem", b =>
@@ -371,7 +372,8 @@ namespace TS.BlogSystem.Data.Migrations
 
                     b.HasOne("TS.BlogSystem.Core.Entities.Category", "Category")
                         .WithMany("Posts")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TS.BlogSystem.Core.Entities.UserRole", b =>

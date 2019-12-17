@@ -13,7 +13,10 @@ namespace TS.BlogSystem.Core.Entities
 
         public bool? IsPending { get; set; }
 
+        public Guid? CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        public Guid? AuthorId { get; set; }
         public virtual User Author { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }

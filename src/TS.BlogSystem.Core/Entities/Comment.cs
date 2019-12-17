@@ -14,7 +14,9 @@ namespace TS.BlogSystem.Core.Entities
         public bool IsReply { get; set; }
         public Guid? InReplyTo { get; set; }
 
+        public Guid? PostId { get; set; }
         public virtual Post Post { get; set; }
+        public Guid? AuthorId { get; set; }
         public virtual User Author { get; set; }
     }
 }
