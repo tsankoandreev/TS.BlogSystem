@@ -37,7 +37,7 @@ This layer contains service classes for magnaging entities, web services, smtp, 
 
 ### TS.BlogSystem.Web
 
-This is Presentation layer based on ASP.NET Core 3, depends on both the Services and Core layers.
+This is Presentation layer based on ASP.NET Core 3, depends on both the Services and Core layers. Main layout and Admin Panel styled with bootstrap 4.
 
 ## License
 This project is licensed with the [MIT license](LICENSE).
